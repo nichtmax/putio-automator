@@ -1,5 +1,5 @@
 FROM alpine:latest
-MAINTAINER Andrew Dacey <adacey@gmail.com>
+MAINTAINER Moritz Werner <moritz@moritz.in>
 # Setup directories
 RUN	mkdir -p /config
 ENV	HOME /config
@@ -10,8 +10,7 @@ RUN	apk update && apk upgrade && apk add --no-cache \
 	py-pip
 RUN	pip install --no-cache-dir putio-automator
 RUN	cp /usr/share/putio-automator/config.py.dist /config/config.py
-RUN	mkdir -p /files/incomplete
 ADD	putio.sh /usr/bin/putio.sh
 WORKDIR /config
-VOLUME 	["/config","/files/downloads","/files/torrents","/files/incomplete"]
+VOLUME 	["/config","/files/torrents"]
 ENTRYPOINT 	["putio.sh"]
